@@ -13,6 +13,9 @@ router.get('/getall', getStudents)
 // Get student by id
 router.get('/get/:id', getStudentById)
 
+router.get('/create', (req, res) => {
+    res.render('form.ejs');
+});
 // create student || POST
 router.post('/create', createStudent)
 

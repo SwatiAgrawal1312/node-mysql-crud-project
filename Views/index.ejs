@@ -1,0 +1,23 @@
+
+
+<a href="/api/v1/student/create">Create New User</a>
+<table>
+  <tr><th>ID</th><th>Name</th><th>Salary</th><th>Actions</th></tr>
+    <% users.forEach(user => { %>
+        <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.roll_no %></td>
+        <td>
+            <a href="/edit/<%= user.id %>">Edit</a> |
+            <form action="/delete/<%= user.id %>" method="POST" style="display:inline;">
+            <button type="submit">Delete</button>
+            </form>
+        </td>
+        </tr>
+
+    <% }) %>
+    </tr>
+</table>
+
+

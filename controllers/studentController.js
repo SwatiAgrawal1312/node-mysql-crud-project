@@ -5,20 +5,15 @@ const bcrypt=require('bcryptjs')
 const getStudents=async(req,res)=>{
     try{
         const data=await db.query('SELECT * FROM students')
-         if(!data){
+        if(!data){
             return res.status(404).send({
                 success:false,
                 message:'No Records found'
 
             });
          }
-        res.status(200).send({
-            success:true,
-            message:'All student Records',
-            totalStudents:data[0].length,
-            data:data[0],
-
-        });
+        console.log(data[0]);
+        res.render("index.ejs", { title: "Student List", users: data[0]}); // Render the EJS template with student data
     }
     catch(error){
         console.log(error)
@@ -73,7 +68,7 @@ const getStudentById=async(req,res)=>{
 
 }
 // create student
-const createStudent=async(req,res)=>{
+const createStudent = async(req,res)=>{
     try{
         const {id,name,roll_no,fees,student_class,medium,username,password}=req.body
 
@@ -92,12 +87,13 @@ const createStudent=async(req,res)=>{
                 message:'Error in insert query'
             })
         }
-        res.status(201).send({
-            success:true,
-            message:'New Student record created',
+        // res.status(201).send({
+        //     success:true,
+        //     message:'New Student record created',
 
 
-        })
+        // })
+        res.redirect('/api/v1/student/getall'); // Redirect to the student list page after successful creation
     }
     catch(error){
         console.log(error)
